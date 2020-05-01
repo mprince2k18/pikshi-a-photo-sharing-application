@@ -6790,7 +6790,7 @@ a.addnewforum {
 .user-profile figure img {
     display: inline-block;
     width: 100%;
-    border-radius: 5px 5px 0 0;
+    border-radius: 10px 10px 0 0;
 }
 .profile-controls {
     background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
@@ -6870,7 +6870,7 @@ a.addnewforum {
 }
 .profile-author {
     display: inline-block;
-    margin-top: -175px;
+    margin-top: -174px;
     margin-left: 10px;
     text-align: center;
     width: 100%;

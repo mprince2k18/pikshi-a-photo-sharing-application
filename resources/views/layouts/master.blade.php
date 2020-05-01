@@ -321,7 +321,7 @@
 			<div class="user-img">
         @auth
           <h5>{{ Auth::user()->name }}</h5>
-          <img src="{{ Auth::user()->photo }}" class="w-45" alt="">
+          <img src="{{ asset('uploads') }}/{{ Auth::user()->photo }}" class="w-45" alt="">
         @endauth
 
         @guest
@@ -331,7 +331,6 @@
         @auth
 
           <div class="user-setting">
-  					<span class="seting-title">User setting <a href="#" title="">see all</a></span>
   					<ul class="log-out">
   						<li><a href="{{ url('profile') }}/{{ Auth::user()->id }}/{{ Auth::user()->name }}" title=""><i class="ti-user"></i> view profile</a></li>
   						<li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>
@@ -349,7 +348,10 @@
 
 
 			</div>
-			<span class="ti-settings main-menu" data-ripple=""></span>
+      @auth
+        <span class="ti-settings main-menu" data-ripple=""></span>
+      @endauth
+
 		</div>
 		<nav>
 			<ul class="nav-list">
@@ -491,69 +493,67 @@
   		</div>
   	</div>
   </div>
-  	<div class="side-panel">
+
+  @auth
+
+    <div class="side-panel">
   		<h4 class="panel-title">General Setting</h4>
-  		<form method="post">
-  			<div class="setting-row">
+  		<form method="post" class="we-form" action="{{ route('user_update',Auth::user()->id) }}" enctype="multipart/form-data">
+        @csrf
+        <div class="setting-row">
   				<span>use night mode</span>
   				<input type="checkbox" id="nightmode1"/>
   				<label for="nightmode1" data-on-label="ON" data-off-label="OFF"></label>
   			</div>
-  			<div class="setting-row">
-  				<span>Notifications</span>
-  				<input type="checkbox" id="switch22" />
-  				<label for="switch22" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>Notification sound</span>
-  				<input type="checkbox" id="switch33" />
-  				<label for="switch33" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>My profile</span>
-  				<input type="checkbox" id="switch44" />
-  				<label for="switch44" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>Show profile</span>
-  				<input type="checkbox" id="switch55" />
-  				<label for="switch55" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
+        <h4 class="panel-title">Profile Setting</h4>
+        <input type="text" placeholder="Name" value="{{ Auth::user()->name }}" name="name" class="@error('name') is-invalid @enderror">
+        <input type="email" placeholder="Email" value="{{ Auth::user()->email }}" name="email" class="@error('email') is-invalid @enderror">
+        <input type="password" placeholder="Password" value="{{ Auth::user()->password }}" name="password" class="@error('password') is-invalid @enderror">
+        <input type="text" placeholder="Profile Bio" value="{{ Auth::user()->profile_bio }}" name="profile_bio" class="@error('profile_bio') is-invalid @enderror">
+        <input type="file" value="{{ Auth::user()->photo }}" name="photo" class="@error('photo') is-invalid @enderror">
+        <input type="file" value="{{ Auth::user()->cover }}" name="cover" class="@error('cover') is-invalid @enderror">
+
+          @error('name')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+
+          @error('email')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+
+          @error('password')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+
+          @error('profile_bio')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+
+          @error('photo')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+
+          @error('cover')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+
+          <button type="submit" class="btn btn-success">Update</button>
   		</form>
-  		<h4 class="panel-title">Account Setting</h4>
-  		<form method="post">
-  			<div class="setting-row">
-  				<span>Sub users</span>
-  				<input type="checkbox" id="switch66" />
-  				<label for="switch66" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>personal account</span>
-  				<input type="checkbox" id="switch77" />
-  				<label for="switch77" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>Business account</span>
-  				<input type="checkbox" id="switch88" />
-  				<label for="switch88" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>Show me online</span>
-  				<input type="checkbox" id="switch99" />
-  				<label for="switch99" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>Delete history</span>
-  				<input type="checkbox" id="switch101" />
-  				<label for="switch101" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  			<div class="setting-row">
-  				<span>Expose author name</span>
-  				<input type="checkbox" id="switch111" />
-  				<label for="switch111" data-on-label="ON" data-off-label="OFF"></label>
-  			</div>
-  		</form>
+
   	</div><!-- side panel -->
+  @endauth
 
     @auth
       <div class="popup-wraper">

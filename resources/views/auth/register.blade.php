@@ -45,7 +45,7 @@
                                     <i class="fa fa-key"></i>Sign Up
                                     <span>Sign Up now and meet the awesome friends around the world.</span>
                                 </div>
-                                <form class="we-form" method="post" action="{{ route('register') }}">
+                                <form class="we-form" method="post" action="{{ route('user_register') }}">
                                   @csrf
                                     <input type="text" placeholder="Name" name="name" class="@error('name') is-invalid @enderror">
 

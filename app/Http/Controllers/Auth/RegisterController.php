@@ -70,11 +70,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'profile_bio' => Str::title('a nice title uses the correct case'),
-            'role' => 'Admin',
-            'photo' => 'https://cdn0.iconfinder.com/data/icons/professional-avatar-5/48/manager_male_avatar_men_character_professions-512.png',
-            'cover' => 'http://wpkixx.com/html/pitnik/images/resources/profile-image.jpg',
-            'slug' => 'mohammad-prince'
         ]);
     }
 }

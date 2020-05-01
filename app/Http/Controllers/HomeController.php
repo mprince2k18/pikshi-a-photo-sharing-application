@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // return view('home');
+        $thumbnailPath = public_path().'/uploads/cover/';
+        // $thumbnailImage->save($thumbnailPath.time().$originalImage->getClientOriginalName());
+        return $thumbnailPath;
     }
+
+
 }

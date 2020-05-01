@@ -25,3 +25,5 @@ Route::get('/','PostController@show')->name('post.show');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/registration', 'FrontendController@store')->name('user_register');
+Route::post('/user/update/{id}', 'ProfileController@update')->name('user_update');

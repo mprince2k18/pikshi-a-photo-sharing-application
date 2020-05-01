@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use Image;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -77,7 +79,40 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+        $user = User::where('id',$id)->firstOrFail();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->profile_bio = $request->profile_bio;
+
+        $user->password = bcrypt($request->password);
+        $user->slug = Str::slug($request->name);
+
+        if($file = $request->hasFile('photo')) {
+
+            $file = $request->file('photo') ;
+
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/uploads/profile' ;
+            $file->move($destinationPath,$fileName);
+            $user->photo = $fileName ;
+          }
+
+
+        if($file = $request->hasFile('cover')) {
+
+            $file = $request->file('cover') ;
+
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/uploads/cover' ;
+            $file->move($destinationPath,$fileName);
+            $user->cover = $fileName ;
+          }
+
+
+        $user->save();
+        return back();
     }
 
     /**
