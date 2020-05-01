@@ -25,8 +25,8 @@ Pikshi
 					@forelse ($posts as $post)
 						<div class="col-lg-2 col-1-5">
 						<figure class="pitrest-post">
-							<a class="user-avatr" href="{{ url('/profile') }}/{{ $post->user->id }}/{{ $post->user->slug }}" title="Victoria"><img src="{{ $post->user->photo }}" class="img-fluid w-45" alt=""></a>
-							{{-- <img src="{{ $post->photo }}" alt=""> --}}
+							<a class="user-avatr" href="{{ url('/profile') }}/{{ $post->user->id }}/{{ $post->user->slug }}" title="Victoria">
+								<img src="{{ asset('uploads/profile') }}/{{ $post->user->photo }}" class="img-fluid w-45" alt=""></a>
 							<img src="{{ asset('uploads/') }}/{{ $post->photo }}" alt="{{ $post->title }}">
 							<h5 class="pitrest-pst-hding">
 								<a href="{{ url('/post') }}/{{ $post->id }}/{{ $post->slug }}" title="">{{ $post->title }}</a></h5>

@@ -20,8 +20,28 @@
        <script src="{{asset('jquery-3.3.1.min.js')}}" type="text/javascript"></script>
        <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script> --}}
 
+       <style media="screen">
+       #global-loader {
+  position:fixed;
+  z-index:50000;
+  background: url('https://www.digitaldesignjournal.com/wp-content/uploads/2018/08/css-loaders-144.gif') no-repeat 50% 50% rgba(255, 255, 255);
+  /* background: url('{{ asset('frontend/preloader.gif') }}') no-repeat 50% 50% rgba(255, 255, 255); */
+  background-repeat: no-repeat;
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  margin:0 auto;
+  z-index: 999999;
+}
+       </style>
+
 </head>
 <body>
+
+  <div id="global-loader" ></div>
+
+
 <div class="se-pre-con"></div>
 <div class="theme-layout">
 
@@ -293,7 +313,7 @@
 							<li class="{{ $notification->is_read === 1 ? Null : 'mark_as_read' }}">
 								<a href="{{ $notification->url }}" title="{{ $notification->url }}">
 									<figure>
-										<img src="{{ $notification->user->photo }}" alt="" class="w-45">
+										<img src="{{ asset('uploads/profile/') }}/{{$notification->user->photo}}" alt="" class="w-45">
 										<span class="status">
                       <i class="ti-{{ $notification->action === "Loved" ? "heart" : null }}"></i>
                       <i class="ti-{{ $notification->action === "Commented" ? "comment" : null }}"></i>
@@ -321,7 +341,7 @@
 			<div class="user-img">
         @auth
           <h5>{{ Auth::user()->name }}</h5>
-          <img src="{{ asset('uploads') }}/{{ Auth::user()->photo }}" class="w-45" alt="">
+          <img src="{{ asset('uploads/profile') }}/{{ Auth::user()->photo }}" class="w-45" alt="">
         @endauth
 
         @guest
@@ -894,5 +914,9 @@
   </body>
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e31e94579255b4d"></script>
-
+<script type="text/javascript">
+$(window).on("load", function(e) {
+     $("#global-loader").fadeOut("fast");
+   });
+</script>
   </html>

@@ -13,29 +13,36 @@ Pikshi Details
 
 
                 <figure class="pitrest-post">
-                  <a class="user-avatr" href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->user->slug }}" title="Victoria"><img src="{{ $single_post->user->photo }}" class="w-45" alt=""></a>
-                  {{-- <img src="{{ $single_post->photo }}" alt=""> --}}
+                  <a class="user-avatr" href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->user->slug }}" title="Victoria">
+                    <img src="{{ asset('uploads/profile') }}/{{ $single_post->user->photo }}" class="w-45" alt=""></a>
                   <img src="{{ asset('uploads/') }}/{{ $single_post->photo }}" alt="">
                   <h5 class="pitrest-pst-hding">
                     <a href="{{ url('/post') }}/{{ $single_post->id }}/{{ $single_post->slug }}" title="">{{ $single_post->title }}</a></h5>
                   <div class="more">
                     <div class="more-post-optns"><i class="ti-more-alt"></i>
-                      <ul>
-                        <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
                         @auth
+                          <ul>
+                          <li class="bad-report"><i class="fa fa-flag"></i>Report Post</li>
                           <li><i class="fa fa-trash-o"></i>Delete Post</li>
+                        </ul>
                         @endauth
-                      </ul>
                     </div>
                   </div>
+
+
                   <div class="over-photo">
                     <div class="likes" title="Like/Dislike">
+                      
                       <strong class="loved">
                         ❤
                       </strong>
+
                       {{ App\Loved::where('post_id',$single_post->id)->count() }}</div>
                     <span>{{ $single_post->created_at->diffForHumans() }}</span>
                   </div>
+
+
+
                 </figure>
 
 
@@ -56,17 +63,16 @@ Pikshi Details
 							</div>
 							<div class="chanel-avatar">
 								<figure>
-                  <a href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->slug }}" title="">
-                  <img src="{{ $single_post->user->photo }}" class="w-80" alt="">
-                  {{-- <img src="{{ asset('frontend/images/resources/chanel-avatar.jpg') }}" alt=""> --}}
+                  <a href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->user->slug }}" title="">
+                  <img src="{{ asset('uploads/profile')}}/{{ $single_post->user->photo }}" class="w-80" alt="">
                 </a></figure>
 								<div class="channl-author">
-									<h5><a href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->slug }}" title="">{{ $single_post->user->name }}</a></h5>
+									<h5><a href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->user->slug }}" title="">{{ $single_post->user->name }}</a></h5>
 									<span>Member since {{ $single_post->user->created_at->format('Y') }}</span>
 								</div>
 							</div>
 							<div class="addnsend">
-								<a class="main-btn" href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->slug }}" title="" data-ripple="">View Profile</a>
+								<a class="main-btn" href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->user->slug }}" title="" data-ripple="">View Profile</a>
 							</div>
 
 						</div>
@@ -108,19 +114,7 @@ Pikshi Details
                     <div class="widget">
   										<h4 class="widget-title">Socials</h4>
   										<ul class="socials">
-  											{{-- <li class="facebook">
-  												<a href="#" title=""><i class="fa fa-facebook"></i> <span>facebook</span> <ins>{{ App\Shared::where('shared_to','Facebook')->where('post_id',$single_post->id)->count() }} shares</ins></a>
-  											</li>
-  											<li class="twitter">
-  												<a href="#" title=""><i class="fa fa-twitter"></i> <span>twitter</span><ins>{{ App\Shared::where('shared_to','Twitter')->where('post_id',$single_post->id)->count() }} shares</ins></a>
-  											</li>
-  											<li class="google">
-  												<a href="#" title=""><i class="fa fa-instagram"></i> <span>instagram</span><ins>{{ App\Shared::where('shared_to','Instagram')->where('post_id',$single_post->id)->count() }} shares</ins></a>
-  											</li> --}}
-
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox"></div>
-
+                        <div class="addthis_inline_share_toolbox"></div>
   										</ul>
   									</div>
 
@@ -143,9 +137,8 @@ Pikshi Details
 						<div class="central-meta">
 							<div class="create-post">
 								<div class="user-fig">
-									<img src="{{ $single_post->user->photo }}" alt="">
-									{{-- <img src="{{ asset('frontend/images/resources/hobo.jpg') }}" alt=""> --}}
-									<a href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->slug }}" title="">{{ $single_post->user->name }}</a>
+									<img src="{{ asset('uploads/profile')}}/{{ $single_post->user->photo }}" alt="">
+									<a href="{{ url('/profile') }}/{{ $single_post->user->id }}/{{ $single_post->user->slug }}" title="">{{ $single_post->user->name }}</a>
 								</div>
 							</div>
 							<div class="about-video">
@@ -165,11 +158,10 @@ Pikshi Details
 
                     					<li>
                     										<div class="comet-avatar">
-                    											<img src="{{ $post_comment->user->photo }}" alt="">
-                    											{{-- <img src="{{ asset('frontend/images/resources/comet-1.jpg') }}" alt=""> --}}
+                    											<img src="{{ asset('uploads/profile')}}/{{ $post_comment->user->photo }}" alt="">
                     										</div>
                     										<div class="we-comment">
-                    											<h5><a href="time-line.html" title="">{{ $post_comment->user->name }}</a></h5>
+                    											<h5><a href="{{ url('/profile') }}/{{ $post_comment->user->id }}/{{ $post_comment->user->slug }}" title="">{{ $post_comment->user->name }}</a></h5>
                     											<p>{{ $post_comment->comment }}</p>
                     											<div class="inline-itms">
                     												<span>{{ $post_comment->created_at->diffForHumans() }}</span>
@@ -185,19 +177,24 @@ Pikshi Details
 										<a href="#" title="" class="showmore underline">more comments+</a>
 									</li> --}}
 
-									<li class="post-comment">
-										<div class="comet-avatar">
-											<img src="{{ asset('frontend/images/resources/hobo.jpg') }}" alt="">
-										</div>
-										<div class="post-comt-box">
-											<form method="post" action="{{ route('comment.store',$single_post->id) }}" class="c-form">
+                @auth
+                  <li class="post-comment">
+                    <div class="comet-avatar">
+                      <img src="{{ asset('uploads/profile') }}/{{ Auth::user()->photo }}" alt="">
+                    </div>
+                    <div class="post-comt-box">
+                      <form method="post" action="{{ route('comment.store',$single_post->id) }}" class="c-form">
                         @csrf
-												<input type="text" placeholder="Post your comment" name="comment"></input>
+                        <input type="text" placeholder="Post your comment" name="comment"></input>
 
-												<button type="submit" class="bg-dark position-static mt-2">Comment</button>
-											</form>
-										</div>
-									</li>
+                        <button type="submit" class="bg-dark position-static mt-2">Comment</button>
+                      </form>
+                    </div>
+                  </li>
+                @endauth
+
+
+
 								</ul>
 							</div>
 						</div>
